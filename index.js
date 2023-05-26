@@ -4,9 +4,7 @@ import { Configuration, OpenAIApi } from 'openai'
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 })
-//temp solution: to remove the User_Agent error due to unsafe API key exposure at the moment.
-//delete configuration.baseOptions.headers['User-Agent']
-//end of temp solution
+
 
 const openai = new OpenAIApi(configuration)
 
