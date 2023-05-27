@@ -31,21 +31,10 @@ async function fetchReply(){
         body: conversationStr
     })
     const data = await response.json()
-    console.log(data)
-    /*
-    const response = await openai.createCompletion({
-        model: 'davinci:ft-averanda-partners-2023-05-26-18-57-22',
-        prompt: conversationStr,
-        presence_penalty: 0,
-        frequency_penalty: 0.3,
-        max_tokens: 100,
-        temperature: 0,
-        stop: ['->',' END']
-    }) 
 
-    conversationStr += ` ${response.data.choices[0].text} END` 
-    renderTypewriterText(response.data.choices[0].text)
-    */
+    conversationStr+=` ${data.reply.choices[0].text} ->`
+    renderTypewriterText(data.reply.choices[0].text)
+    console.log(data)
 }
 
 function renderTypewriterText(text) {
