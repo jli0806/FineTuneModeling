@@ -1,12 +1,5 @@
-import { Configuration, OpenAIApi } from 'openai'
 
 
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-})
-
-
-const openai = new OpenAIApi(configuration)
 
 const chatbotConversation = document.getElementById('chatbot-conversation')
  
@@ -28,6 +21,18 @@ document.addEventListener('submit', (e) => {
 }) 
 
 async function fetchReply(){
+    const url = 'https://fancy-kashata-f8b53d.netlify.app/.netlify/functions/fetchAI'
+
+    const response = await fetch (url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'text/plain',
+        },
+        body: conversationStr
+    })
+    const data = await response.json()
+    console.log(data)
+    /*
     const response = await openai.createCompletion({
         model: 'davinci:ft-averanda-partners-2023-05-26-18-57-22',
         prompt: conversationStr,
@@ -40,6 +45,7 @@ async function fetchReply(){
 
     conversationStr += ` ${response.data.choices[0].text} END` 
     renderTypewriterText(response.data.choices[0].text)
+    */
 }
 
 function renderTypewriterText(text) {
